@@ -1,0 +1,23 @@
+<%= simple_form_for :session, url: session_path do |f| %>
+  <div class="form-group">
+    <%= f.input :email%>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :password %>
+  </div>
+
+  <div class="form-group clearfix">
+    <%= f.button :submit, "Sign in", class: "btn pull-right btn-default"%>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="other-links">
+    <% if Clearance.configuration.allow_sign_up? %>
+      <%= link_to t(".sign_up"), sign_up_path %>
+    <% end %>
+    <br>
+    <%= link_to t(".forgot_password"), new_password_path %>
+  </div>
+</div>

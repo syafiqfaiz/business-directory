@@ -1,0 +1,21 @@
+<div class="block">
+    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+      <header>
+          <h1 class="page-title">Sign Up</h1>
+      </header>
+      <hr>
+      <%= simple_form_for @user, id: "form-sign-in-account" do |form| %>
+        <%= render partial: '/users/form', object: form %>
+
+        <div class="form-group ">
+          <%= form.button :submit, "Sign Up", class: "btn pull-right btn-default" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+      <%= link_to t(".sign_in"), sign_in_path %>
+    </div>
+</div>
+
+
+                    

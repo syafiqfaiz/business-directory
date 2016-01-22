@@ -1,4 +1,4 @@
-<%= form_for(@organisation) do |f| %>
+<%= simple_form_for(@organisation) do |f| %>
   <% if @organisation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@organisation.errors.count, "error") %> prohibited this organisation from being saved:</h2>
@@ -9,12 +9,72 @@
       <% end %>
       </ul>
     </div>
-    <%= f.input :name %>
-    <%= f.input :email %>
-    <%= f.input :address %>
   <% end %>
+  <div class="info-block">
+    <div class="form-group">
+      <%= f.input :name%>
+    </div>
+    <div class="form-group">
+      <%= f.input :description %>
+    </div>
+  </div>
+  <div class="info-block">
+    <h3>Contact & Address</h3>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.input :email %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.input :phone_number %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.input :address %>
+    </div>
+  </div>
+  
+  <div class="info-block">
+    <h3>Website & Social media</h3>
+    <hr>
+    <div class="row info-block">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.input :website %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.input :facebook %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      <div class="form-group">
+        <%= f.input :twitter %>
+      </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.input :instagram %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group clearfix">
+    <%= f.button :submit, "Submit", class: "btn pull-right btn-default" %>
   </div>
 <% end %>
+
+<style>
+  .info-block{
+    padding-bottom: 20px;
+  }
+</style>

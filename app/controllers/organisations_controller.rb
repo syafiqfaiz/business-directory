@@ -55,6 +55,8 @@ class OrganisationsController < ApplicationController
 
 
     def organisation_params
-      params.require(:organisation).permit(:name, :email, :address, :phone_number)
+      params.require(:organisation).permit(:name, :email, :address, :phone_number, :description, :website, :facebook, :instagram, :twitter)
     end
 end
+
+
