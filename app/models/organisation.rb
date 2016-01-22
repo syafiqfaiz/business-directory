@@ -1,5 +1,6 @@
 class Organisation < ActiveRecord::Base
   belongs_to :user
+  belongs_to :category
   has_many :products
   
   extend FriendlyId

@@ -8,6 +8,17 @@ users_data = []
                  phone_number: '056416999'
                 }
 end
+
+categories_data = [
+                    {name: "Restaurant"},
+                    {name: "Telecommunication"},
+                    {name: "Automotive"},
+                    {name: "Service"},
+                    {name: "Cosmetic"},
+                    {name: "Health"},
+                    {name: "Fashion"}
+                  ]
+
 organisations_data = []
 15.times do
   organisations_data << { 
@@ -36,11 +47,13 @@ products_data = []
                     }
 end
 
+categories = Category.create(categories_data)
 
 users_data << {email: 'syafiqfaiz@gmail.com', password: 123456, name: 'faiz', phone_number: '056416999'}
 users = User.create(users_data)
 
 organisations = Organisation.create(organisations_data)
 organisations.each do |organisation|
+  categories.sample.organisations << organisation
   organisation.products.create(products_data)
 end

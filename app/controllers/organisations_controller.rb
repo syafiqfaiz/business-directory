@@ -50,7 +50,7 @@ class OrganisationsController < ApplicationController
   private
 
     def set_organisation
-      @organisation = Organisation.find(params[:id])
+      @organisation = Organisation.friendly.find(params[:id])
     end
 
 

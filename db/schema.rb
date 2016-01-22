@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122131233) do
+ActiveRecord::Schema.define(version: 20160122161533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -46,8 +55,10 @@ ActiveRecord::Schema.define(version: 20160122131233) do
     t.string   "instagram"
     t.string   "twitter"
     t.string   "slug"
+    t.integer  "category_id"
   end
 
+  add_index "organisations", ["category_id"], name: "index_organisations_on_category_id", using: :btree
   add_index "organisations", ["slug"], name: "index_organisations_on_slug", unique: true, using: :btree
   add_index "organisations", ["user_id"], name: "index_organisations_on_user_id", using: :btree
 
@@ -96,6 +107,7 @@ ActiveRecord::Schema.define(version: 20160122131233) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
+  add_foreign_key "organisations", "categories"
   add_foreign_key "organisations", "users"
   add_foreign_key "products", "organisations"
   add_foreign_key "taggings", "products"
