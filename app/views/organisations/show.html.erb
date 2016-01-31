@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-md-4 col-sm-4">
             <div class="logo">
-              <div class="image"><%= image_tag("organisation.png") %></div>
+              <div class="image"><img src="<%= @organisation.organisation_url || asset_path('item.jpg') %>" alt=""> </div>
             </div>
           </div>
           <div class="col-md-8 col-sm-8">
@@ -77,54 +77,16 @@
       <!--Company Items-->
       <section>
         <header><h2>Company Items</h2></header>
-        <div class="expandable-content height collapsed show-380" id="company-items">
+        <div id="company-items">
           <div class="content">
             <div class="row">
               <% @organisation.products.first(6).each do |product| %>
-                <div class="col-md-4 col-sm-4">
-                  <div class="item equal-height">
-                    <div class="image">
-                      <div class="quick-view"><i class="fa fa-eye"></i><span>Quick View</span></div>
-                      <a href="item-detail.html">
-                        <div class="overlay">
-                          <div class="inner">
-                            <div class="content">
-                              <h4>Description</h4>
-                              <p><%= product.description %></p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="item-specific">
-                          <span title="Text"><%= product.name %></span>
-                        </div>
-                        <div class="icon">
-                          <i class="fa fa-thumbs-up"></i>
-                        </div>
-                        <%= image_tag("item.jpg") %>
-                      </a>
-                    </div>
-                    <div class="wrapper">
-                      <a href="item-detail.html"><h3><%= product.name %></h3></a>
-                      <figure>63 Birch Street</figure>
-                      <div class="info">
-                        <div class="type">
-                          <i class="fa fa-cutlery"></i>
-                          <span>Restaurant</span>
-                        </div>
-                        <div class="rating" data-rating="4"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.item-->
-                </div>
-                <!--/.col-sm-4-->
+                <%= render 'products/show_grid', product: product %>
               <% end %>
             </div>
           </div>
         </div>
-        <div class="center">
-          <a href="#" class="show-more expand-content" data-expand="#company-items" >Show More</a>
-        </div>
+
       </section>
       <!--end Company Items-->
     </div>
@@ -134,63 +96,13 @@
       <aside id="sidebar">
         <section>
           <header><h2>In the same category</h2></header>
-          <a href="item-detail.html" class="item-horizontal small">
-            <h3>Cash Cow Restaurante</h3>
-            <figure>63 Birch Street</figure>
-            <div class="wrapper">
-              <div class="image"><%= image_tag("item.jpg") %></div>
-              <div class="info">
-                <div class="type">
-                  <i class="fa fa-cutlery"></i>
-                  <span>Restaurant</span>
-                </div>
-                <div class="rating" data-rating="4"></div>
-              </div>
-            </div>
-          </a>
-          <!--/.item-horizontal small-->
-          <a href="item-detail.html" class="item-horizontal small">
-            <h3>Blue Chilli</h3>
-            <figure>2476 Whispering Pines Circle</figure>
-            <div class="wrapper">
-              <div class="image"><%= image_tag("item.jpg") %></div>
-              <div class="info">
-                <div class="type">
-                  <i class="fa fa-cutlery"></i>
-                  <span>Restaurant</span>
-                </div>
-                <div class="rating" data-rating="3"></div>
-              </div>
-            </div>
-          </a>
-          <!--/.item-horizontal small-->
-          <a href="item-detail.html" class="item-horizontal small">
-            <h3>Eddie’s Fast Food</h3>
-            <figure>4365 Bruce Street</figure>
-            <div class="wrapper">
-              <div class="image"><%= image_tag("item.jpg") %></div>
-              <div class="info">
-                <div class="type">
-                  <i class="fa fa-cutlery"></i>
-                  <span>Restaurant</span>
-                </div>
-                <div class="rating" data-rating="5"></div>
-              </div>
-            </div>
-          </a>
+          <% @companies.each do |company| %>
+            <%= render 'organisations/show_vertical', company: company %>
+          <% end %>
           <!--/.item-horizontal small-->
         </section>
         <section>
-          <header><h2>Categories</h2></header>
-          <ul class="bullets">
-            <li><a href="#" >Restaurant</a></li>
-            <li><a href="#" >Steak House & Grill</a></li>
-            <li><a href="#" >Fast Food</a></li>
-            <li><a href="#" >Breakfast</a></li>
-            <li><a href="#" >Winery</a></li>
-            <li><a href="#" >Bar & Lounge</a></li>
-            <li><a href="#" >Pub</a></li>
-          </ul>
+          <%= render 'categories/categories' %>
         </section>
       </aside>
       <!-- /#sidebar-->

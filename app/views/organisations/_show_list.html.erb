@@ -1,0 +1,29 @@
+<div class="item list">
+  <div class="image">
+    <div class="quick-view"><i class="fa fa-eye"></i><span>Quick View</span></div>
+    <a href="<%= organisation_path(organisation) %>">
+      <div class="overlay">
+        <div class="inner">
+          <div class="content">
+            <h4>Description</h4>
+            <p><%= organisation.description %></p>
+          </div>
+        </div>
+      </div>
+      <div class="item-specific">
+
+      </div>
+
+      <img src="<%= organisation.organisation.try(:url) || asset_path("item.jpg") %>" alt="">
+    </a>
+  </div>
+  <div class="wrapper">
+    <a href="<%= organisation_path(organisation) %>"><h3><%= organisation.name.capitalize %></h3></a>
+    <figure><%= organisation.location.capitalize %></figure>
+    <div class="info">
+      <div class="type">
+        <span><%= organisation.category.name.capitalize %></span>
+      </div>
+    </div>
+  </div>
+</div>

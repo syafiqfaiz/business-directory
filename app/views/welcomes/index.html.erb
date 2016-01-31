@@ -1,2 +1,40 @@
-<h1>Welcomes#index</h1>
-<p>Find me in app/views/welcomes/index.html.erb</p>
+<div class="row">
+  <div class="col-md-9">
+    <div class="row">
+      <div class="featured">
+        <h1 class="page-title">Featured Product</h1>
+        <hr>
+        <%= render 'products/show', product: @featured_product %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="latest-product">
+        <h1 class="page-title">Latest Products</h1>
+        <hr>
+        <% @latest_products.each do |product| %>
+          <%= render 'products/show_grid', product: product %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="latest-company">
+        <h1 class="page-title">Latest Companies</h1>
+        <hr>
+        <% @latest_companies.each do |company| %>
+          <%= render 'organisations/show_list', organisation: company %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <aside id="sidebar">
+      <section>
+       <%= render 'categories/categories' %>
+      </section>
+    </aside>
+    <!-- /#sidebar-->
+  </div>
+  <!-- /.col-md-3-->
+  <!--end Sidebar-->
+</div>

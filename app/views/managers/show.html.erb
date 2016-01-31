@@ -1,0 +1,57 @@
+<!--Page Content-->
+<div id="page-content">
+  <section class="container">
+    <header>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="profile.html"><h1 class="page-title"><%= current_user.name %></h1></a></li>
+      </ul>
+    </header>
+    <div class="row">
+      <div class="col-md-9 col-sm-9 col-md-offset-2">
+      <h1 class="page-title"><%= @organisation.name.capitalize %><small style="padding-left: 30px;"><%= link_to("New product", new_organisation_product_path(@organisation) ) %></small> </h1>
+        <section id="items">
+          <% @organisation.products.each do |product| %>
+          <div class="item list admin-view">
+            <div class="image">
+              <div class="quick-view" data-toggle="modal" data-target="#modal-bar"><i class="fa fa-eye"></i><span>Quick View</span></div>
+              <a href="<%= organisation_product_path(@organisation.slug, product.slug) %>">
+                <div class="overlay">
+                  <div class="inner">
+                    <div class="content">
+                      <h4>Description</h4>
+                      <p><%= product.description %></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="item-specific">
+                </div>
+
+                <img src="<%= product.product.first.try(:url) || asset_path('item.jpg') %>" alt="">
+              </a>
+            </div>
+            <div class="wrapper">
+              <a href="<%= organisation_product_path(@organisation.slug, product.slug) %>"><h3><%= product.name.capitalize %></h3></a>
+              <div class="info">
+                <div class="type">
+                  <% product.tags.each do |tag| %>
+                    <span><%=tag.name %></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="description">
+              <ul class="list-unstyled actions">
+                <li><%= link_to(edit_organisation_product_path(@organisation, product)) do %><i class="fa fa-pencil"></i><% end %></li>
+                <li><%= link_to(organisation_product_path(@organisation, product)) do %><i class="fa fa-eye"></i><% end %></li>
+                <li><%= link_to(organisation_product_path(@organisation, product), method: :delete, data: { confirm: "Are you sure?" }) do %><i class="fa fa-trash"></i><% end %></li>
+              </ul>
+            </div>
+          </div>
+          <% end %>
+          <!-- /.item-->
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end Page Content-->

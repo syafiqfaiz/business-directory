@@ -1,0 +1,24 @@
+<h1 class="page-title"><%= product.name.capitalize %></h1>
+
+<!-- <div class="sp-loading"><img src="images/sp-loading.gif" alt=""><br>LOADING IMAGES</div> -->
+<div class="col-md-4 col-xs-12">
+  <div class="sp-wrap">
+    <% product.product.each do |image| %>
+      <a href="<%= image.try(:url) || asset_path('item.jpg') %>">
+        <img src="<%= image.standard.try(:url) || asset_path('item.jpg') %>" alt="Thumbnail" >
+      </a>
+    <% end %>
+  </div>
+</div>
+
+<div class="col-md-8 col-xs-12">
+<h3><strong>Description</strong></h3>
+  <p><%= product.description %></p>
+  <p><strong><%= number_to_currency(product.price , :unit => "RM ")%></strong></p>
+  <%= link_to(organisation_path(product.organisation.slug) ) do %>
+    <p>by <%= product.organisation.name.capitalize %></p>
+  <% end %>
+
+  <p>Phone: <%= product.organisation.phone_number %></p>
+  <p>Email: <%= product.organisation.email %></p>
+</div>

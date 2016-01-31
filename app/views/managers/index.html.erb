@@ -1,0 +1,56 @@
+<!--Page Content-->
+<div id="page-content">
+  <section class="container">
+    <header>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#"><h1 class="page-title"><%= current_user.name %></h1></a></li>
+      </ul>
+    </header>
+    <div class="row">
+      <div class="col-md-9 col-sm-9 col-md-offset-2">
+        <h1 class="page-title">Your company. <small style="padding-left: 20px;"><%= link_to("Add company.", new_organisation_path ) %></small></h1>
+        <section id="items">
+          <% @organisations.each do |organisation| %>
+          <div class="item list admin-view">
+            <div class="image">
+              <div class="quick-view" data-toggle="modal" data-target="#modal-bar"><i class="fa fa-eye"></i><span>Quick View</span></div>
+              <a href="<%= manager_path(organisation.slug) %>">
+                <div class="overlay">
+                  <div class="inner">
+                    <div class="content">
+                      <h4>Description</h4>
+                      <p><%= organisation.description %></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="item-specific">
+                </div>
+
+                <img src="<%= organisation.organisation.try(:url) || asset_path("item.jpg") %>" alt="">
+              </a>
+            </div>
+            <div class="wrapper">
+              <a href="<%= manager_path(organisation.slug) %>"><h3><%= organisation.name.capitalize %></h3></a>
+              <figure><%= organisation.street %></figure>
+              <div class="info">
+                <div class="type">
+                  <span><%= organisation.category.name %></span>
+                </div>
+              </div>
+            </div>
+            <div class="description">
+              <ul class="list-unstyled actions">
+                <li><%= link_to(edit_organisation_path(organisation)) do %><i class="fa fa-pencil"></i><% end %></li>
+                <li><%= link_to(organisation_path(organisation)) do %><i class="fa fa-eye"></i><% end %></li>
+                <li><%= link_to(organisation_path(organisation), method: :delete, data: { confirm: "Are you sure?\n All related products will be deleted as well." }) do %><i class="fa fa-trash"></i><% end %></li>
+              </ul>
+            </div>
+          </div>
+          <% end %>
+          <!-- /.item-->
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end Page Content-->

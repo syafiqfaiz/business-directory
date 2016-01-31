@@ -1,4 +1,4 @@
-<%= simple_form_for(@organisation) do |f| %>
+<%= simple_form_for(@organisation, html: { multipart: true }) do |f| %>
   <% if @organisation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@organisation.errors.count, "error") %> prohibited this organisation from being saved:</h2>
@@ -17,6 +17,9 @@
     <div class="form-group">
       <%= f.input :description %>
     </div>
+    <div class="form-group">
+      <%= f.association :category%>
+    </div>
   </div>
   <div class="info-block">
     <h3>Contact & Address</h3>
@@ -33,8 +36,29 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <%= f.input :address %>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.input :street %>
+        </div>
+      </div>
+      <div class="col-md-6">
+      <div class="form-group">
+          <%= f.input :city %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.input :postcode %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.input :state %>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -63,6 +87,14 @@
         <div class="form-group">
           <%= f.input :instagram %>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.input :organisation, label: "Company logo" %>
       </div>
     </div>
   </div>

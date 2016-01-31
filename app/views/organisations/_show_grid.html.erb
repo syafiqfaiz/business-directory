@@ -1,0 +1,29 @@
+<div class="col-md-3 col-sm-4">
+  <div class="item">
+    <div class="image">
+      <div class="quick-view"><i class="fa fa-eye"></i><span>Quick View</span></div>
+      <a href="<%= organisation_path(organisation) %>">
+        <div class="overlay">
+          <div class="inner">
+            <div class="content">
+              <h4>Description</h4>
+              <p><%= organisation.description %></p>
+            </div>
+          </div>
+        </div>
+        <div class="item-specific">
+          <span title="Text"><%= organisation.name %></span>
+        </div>
+        <img src="<%= organisation.organisation.try(:url) || asset_path('item.jpg') %>" alt="">
+      </a>
+    </div>
+    <div class="wrapper">
+      <%= link_to(organisation_path(id: organisation.slug)) do %>
+        <h3><%= organisation.name %></h3>
+      <% end %>
+      <figure><%= organisation.city %></figure>
+    </div>
+  </div>
+  <!-- /.item-->
+</div>
+<!--/.col-sm-4-->

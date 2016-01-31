@@ -2,5 +2,5 @@ class Category < ActiveRecord::Base
   has_many :organisations
   
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: [:slugged, :finders]
 end

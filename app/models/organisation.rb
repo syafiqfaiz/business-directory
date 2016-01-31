@@ -1,10 +1,12 @@
 class Organisation < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
-  has_many :products
+  has_many :products, dependent: :destroy
+
+  mount_uploader :organisation, OrganisationUploader
   
   extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  friendly_id :slug_candidates, use: [:slugged, :finders]
 
   def slug_candidates
     [
@@ -14,5 +16,11 @@ class Organisation < ActiveRecord::Base
       [:name, :street, :city, :state]
     ]
   end
-end
 
+  validates :user, :name, :email, :street, :postcode, :city, :state, :phone_number, 
+  :description, :slug, :category, :organisation, presence: true
+
+  def location
+    "#{city.capitalize}, #{state.capitalize} "
+  end
+end

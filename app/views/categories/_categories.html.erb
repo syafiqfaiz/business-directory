@@ -1,0 +1,8 @@
+<header><h2>Categories</h2></header>
+<ul class="bullets">
+  <% @categories.each do |category| %>
+    <%= link_to(category_path(id: category.slug)) do %>
+      <li><%= category.name.capitalize %></li>
+    <% end %>
+  <% end %>
+</ul>

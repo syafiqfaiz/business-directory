@@ -1,0 +1,12 @@
+<%= link_to(organisation_path(id: company.slug), class: "item-horizontal small") do %>
+  <h3><%= company.name.capitalize %></h3>
+  <figure><%= company.city.capitalize %></figure>
+  <div class="wrapper">
+    <div class="image"><%= image_tag("item.jpg") %></div>
+    <div class="info">
+      <div class="type">
+        <span><%= company.category.name.capitalize %></span>
+      </div>
+    </div>
+  </div>
+<% end %>

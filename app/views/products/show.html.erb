@@ -1,4 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-9">
+    <section>
+    <%= render 'show', product: @product %>
+    </section>
+  </div>
+  <!--Sidebar-->
+  <div class="col-md-3">
+    <aside id="sidebar">
+      <section>
+        <div><header><h2>In the same category</h2></header></div>
+        <%= render 'products/show_vertical', products: @related_products %>
+      </section>
+      <section>
+        <%= render 'categories/categories' %>
+      </section>
+    </aside>
+    <!-- /#sidebar-->
+  </div>
+  <!-- /.col-md-3-->
+  <!--end Sidebar-->
+</div>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<script type="text/javascript">
+    /* wait for images to load */
+    $(window).load( function() {
+        $('.sp-wrap').smoothproducts();
+    });
+</script>

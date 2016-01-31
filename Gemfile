@@ -14,6 +14,9 @@ gem 'clearance'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'friendly_id', '~> 5.1.0'
 gem 'simple_form'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem "mini_magick"
+gem "administrate", "~> 0.1.3"
 
 
 group :development, :test do

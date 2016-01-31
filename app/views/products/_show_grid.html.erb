@@ -1,0 +1,31 @@
+<div class="col-md-3 col-sm-4">
+  <div class="item">
+    <div class="image">
+      <div class="quick-view"><i class="fa fa-eye"></i><span>Quick View</span></div>
+      <a href="<%= organisation_product_path(product.organisation.slug, product.slug) %>">
+        <div class="overlay">
+          <div class="inner">
+            <div class="content">
+              <h4>Description</h4>
+              <p><%= product.description %></p>
+            </div>
+          </div>
+        </div>
+        <img src="<%= product.product.first.try(:url) || asset_path('item.jpg') %>" alt="">
+      </a>
+    </div>
+    <div class="wrapper">
+      <a href="<%= organisation_product_path(product.organisation.slug, product.slug) %>">
+        <h3><%= product.organisation.name.capitalize %></h3>
+      </a>
+      <figure><%= product.organisation.street.capitalize %></figure>
+      <div class="info">
+        <div class="type">
+          <% product.tags.each do |tag| %>
+            <span><%= tag.name.capitalize %></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.item-->
+</div>

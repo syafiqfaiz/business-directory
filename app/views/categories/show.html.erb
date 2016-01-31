@@ -1,2 +1,8 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<header><h2><%= @category.name.capitalize %></h2></header>
+<section class="block equal-height">
+  <div class="row">
+    <% @organisations.each do |organisation| %>
+      <%= render 'organisations/show_grid', organisation: organisation %>
+    <% end %>
+  </div>
+</section>

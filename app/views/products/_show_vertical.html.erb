@@ -1,0 +1,17 @@
+<% products.each do |product| %>
+  <%= link_to(organisation_product_path(product.organisation.slug, product.slug), class: "item-horizontal small") do %>
+    <h3><%= product.name.capitalize %></h3>
+    <figure><%= product.organisation.city.capitalize %></figure>
+    <div class="wrapper">
+      <div class="image"><img src="<%= product.product.first.try(:url) || asset_path("item.jpg") %>"> </div>
+      <div class="info">
+        <div class="type">
+          <% product.tags.each do |tag| %>
+            <span><%= tag.name.capitalize %></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<!--/.item-horizontal small-->

@@ -47,13 +47,26 @@ products_data = []
                     }
 end
 
+
+tags_data = []
+5.times do 
+  tags_data <<  {
+                  name: Faker::Lorem.word
+                }
+end
+
+tags = Tag.create(tags_data)
+
 categories = Category.create(categories_data)
 
 users_data << {email: 'syafiqfaiz@gmail.com', password: 123456, name: 'faiz', phone_number: '056416999'}
 users = User.create(users_data)
 
+
 organisations = Organisation.create(organisations_data)
 organisations.each do |organisation|
   categories.sample.organisations << organisation
-  organisation.products.create(products_data)
+  tags.sample.products << organisation.products.create(products_data)
 end
+
+

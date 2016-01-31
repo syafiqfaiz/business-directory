@@ -1,9 +1,16 @@
 class OrganisationsController < ApplicationController
   before_action :set_organisation, only: [:show, :edit, :update, :destroy]
   before_action :require_login, except: [:show]
+  before_action :authenticate_owner, only: [:edit, :update, :destroy]
 
 
   def show
+    @categories = Category.all
+    if @organisation.category
+      @companies = @organisation.category.organisations.limit(3).order('RANDOM()')
+    else
+      @companies = Organisation.limit(3).order('RANDOM()')
+    end
   end
 
   def new
@@ -42,12 +49,16 @@ class OrganisationsController < ApplicationController
   def destroy
     @organisation.destroy
     respond_to do |format|
-      format.html { redirect_to organisations_url, notice: 'Organisation was successfully destroyed.' }
+      format.html { redirect_to managers_path, notice: 'Organisation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+
+    def authenticate_owner
+      redirect_to sign_in_path unless @organisation.user_id == current_user.id
+    end
 
     def set_organisation
       @organisation = Organisation.friendly.find(params[:id])
@@ -55,7 +66,7 @@ class OrganisationsController < ApplicationController
 
 
     def organisation_params
-      params.require(:organisation).permit(:name, :email, :address, :phone_number, :description, :website, :facebook, :instagram, :twitter)
+      params.require(:organisation).permit(:name, :email, :street, :city, :postcode, :state, :phone_number, :description, :website, :facebook, :instagram, :twitter, :organisation)
     end
 end
 
